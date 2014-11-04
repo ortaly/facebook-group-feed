@@ -1,0 +1,21 @@
+.view-container{
+	width: 295px;
+	padding: 10px;
+	font-family: Open sans;
+	border: 1px solid #e4e4e4;
+}
+
+.fbgroup-feed-image{
+	display: block;
+	height: 113px;
+	width: 316px;
+	padding-bottom: 8px;
+	background: url('http://tikalk.com/sites/all/themes/sasson/tikal/images/banners/facebook-button-small.jpg') no-repeat;
+}
+
+.fb-group-feed-title h2{
+	display: inline;
+	font-size: 18px;
+	font-weight: 400;
+	font-family: Open sans;
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" ng-app="FBGroupFeedModule">
+<head>
+  <meta charset="utf-8">
+  <title>Facebook Group Feed</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  <script src="feed.ctrl.js"></script>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body ng-controller="FeedCtrl">
+  <div class="view-container">
+    <a class="fbgroup-feed-image" href="https://www.facebook.com/groups/225585444263260" target="_blank" title="Fullstack Developers Israel"></a>
+    <h1>Join the discussion</h1>
+    <div class="fb-group-feed-title">
+      <img src="https://fbstatic-a.akamaihd.net/rsrc.php/v2/y0/r/-HwODK0dBGZ.png">
+      <h2><a>Fullstack Developers Israel</a></h2>
+    </div>
+    <div ng-repeat="event in data.items">
+      <a><img src={{event.image}}></a>
+      <span>{{event.text}}</span>
+    </div>
+
+  </div>
+</body>
+</html>
