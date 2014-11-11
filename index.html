@@ -33,10 +33,10 @@
             <div class="fb-group-feed-post-author">
                <span>By <a href={{feed.profilePage}} target="_blank">{{feed.authorName}}</a>
                </span>
-               <span>{{feed.created}}</span>
+               <span>{{feed.created | dateSuffix}}</span>
             </div>
             <div class="fb-group-feed-post-message">
-              <a href={{feed.postMessage}} target="_blank">{{feed.message}}</a>
+              <a href={{feed.postMessage} target="_blank">{{feed.message | cut:true:100}}</a>
             </div> 
           </div>
         </div>

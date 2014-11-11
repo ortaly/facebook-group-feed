@@ -53,37 +53,33 @@ service('FBDataService', ['$http', '$window', '$q', function($http, $window, $q)
 		
 	}
 
-		     // fb.api('/me', function(response) {
-			    //   console.log('Successful login for: ' + response.name);
-			    //   document.getElementById('status').innerHTML =
-			    //     'Thanks for logging in, ' + response.name + '!';
-			    // });
+}]).
+filter('dateSuffix', function($filter) {
+  var suffixes = ["th", "st", "nd", "rd"];
+  return function(input) {
+    var dtfilter = $filter('date')(input, 'MMM, dd');
+    var day = parseInt(dtfilter.slice(-2));
+    var relevantDigits = (day < 30) ? day % 20 : day % 30;
+    var suffix = (relevantDigits <= 3) ? suffixes[relevantDigits] : suffixes[0];
+    return dtfilter+suffix;
+  };
+}).
+filter('cut', function () {
+    return function (value, wordwise, max, tail) {
+        if (!value) return '';
 
-	    	//var access_token = FB.getAccessToken();
-		    //var access_token = 'access_token=334506690062624|wYA-QpptpE0UZBjBTicmS2JKkIU'; 
+        max = parseInt(max, 10);
+        if (!max) return value;
+        if (value.length <= max) return value;
 
-		    //var url = "https://graph.facebook.com/225585444263260/events?";
-	    	//$access_token = https://graph.facebook.com/oauth/access_token?client_id=334506690062624&client_secret=364028d6589468aa611a9dd5210fc2c0&grant_type=client_credentials
-	  //   	fb.api('/me/conversations', { access_token:'334506690062624|wYA-QpptpE0UZBjBTicmS2JKkIU'}, function(response) {
-	  //   		debugger;
-			//   console.log(response);
-			// });
+        value = value.substr(0, max);
+        if (wordwise) {
+            var lastspace = value.lastIndexOf(' ');
+            if (lastspace != -1) {
+                value = value.substr(0, lastspace);
+            }
+        }
 
-
-
-	// $http.get(url, config).success(function(res){
-	// 	debugger;
-	// 	$scope.data = res;
-	// });		
-	// data = {
-	// 	items: [
-	// 	{image:'https://graph.facebook.com/753746590/picture', text: 'By Robert Ferentz on Oct, 30th Oren Farhi speaking at Fullstack event.'},
-	// 	{image: 'https://graph.facebook.com/648596391/picture', text : 'By Lior Kanfi on Oct, 22nd Upcoming event in on the 30/10 about Automated UI testing for web applications, come and join us!...' },
-	// 	{image: 'https://graph.facebook.com/1032384980/picture', text : 'By Chaim Turkel on Oct, 20th I hope this summary about graphite will encourage you to use it http://www.tikalk.com/node/12450' }
-	// 	]
-	// }
-
-	// return data;
-	// };
-
-}]);
+        return value + (tail || ' …');
+    };
+});
