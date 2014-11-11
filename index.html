@@ -3,24 +3,46 @@
 <head>
   <meta charset="utf-8">
   <title>Facebook Group Feed</title>
+  <script src="http://connect.facebook.net/en_US/all.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
   <script src="feed.ctrl.js"></script>
+  <script src="http://connect.facebook.net/en_US/all.js"></script>
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600,700" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body ng-controller="FeedCtrl">
-  <div class="view-container">
-    <a class="fbgroup-feed-image" href="https://www.facebook.com/groups/225585444263260" target="_blank" title="Fullstack Developers Israel"></a>
-    <h1>Join the discussion</h1>
-    <div class="fb-group-feed-title">
-      <img src="https://fbstatic-a.akamaihd.net/rsrc.php/v2/y0/r/-HwODK0dBGZ.png">
-      <h2><a>Fullstack Developers Israel</a></h2>
-    </div>
-    <div ng-repeat="event in data.items">
-      <a><img src={{event.image}}></a>
-      <span>{{event.text}}</span>
-    </div>
+  <div id="block-tikal-fbgroup-feed-fbgroup-feed">
+      
+    <div class="content">
+      <div class="view-container fb-group-feed-wrapper">
+        <div class="fb-group-feed-header"> 
+          <a class="fbgroup-feed-image" href="https://www.facebook.com/groups/225585444263260" target="_blank" title="Fullstack Developers Israel"></a>
+          Join the discussion
+        </div>
+        <div class="fb-group-feed-title">
+          <img src="https://fbstatic-a.akamaihd.net/rsrc.php/v2/y0/r/-HwODK0dBGZ.png">
+          <h2><a>Fullstack Developers Israel</a></h2>
+        </div>
 
+        <div class="fb-group-feed-body">
+          <div ng-repeat="feed in data" class="fb-group-feed-post">
+             <a href={{feed.profilePage}} title="View " + {{feed.authorName}} + "\'s profile" target="_blank">
+                <img border="0" title={{feed.authorName}}  alt={{feed.authorName}} src={{feed.image}}>
+            </a>
+            <div class="fb-group-feed-post-author">
+               <span>By <a href={{feed.profilePage}} target="_blank">{{feed.authorName}}</a>
+               </span>
+               <span>{{feed.created}}</span>
+            </div>
+            <div class="fb-group-feed-post-message">
+              <a href={{feed.postMessage}} target="_blank">{{feed.message}}</a>
+            </div> 
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </body>
 </html>
